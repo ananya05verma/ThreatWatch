@@ -204,8 +204,8 @@ if df is not None and not df.empty:
     # -------------------------------
     # LAYOUT
     # -------------------------------
-    tab_overview, tab_logs, tab_analytics, tab_intel = st.tabs(
-        ["Overview", "Logs", "Analytics", "Threat intel"]
+    tab_overview, tab_logs, tab_analytics, tab_intelligence = st.tabs(
+        ["Overview", "Logs", "Analytics", "Threat Intelligence"]
     )
 
     # -------------------------------
@@ -213,7 +213,7 @@ if df is not None and not df.empty:
     # -------------------------------
     alerts = []
     if (df["action"] == "LOGIN_FAILED").sum() >= 5:
-        alerts.append("Brute force pattern detected (high login failures).")
+        alerts.append("Potential brute force attack detected (high login failures).")
     if (df["action"] == "DATA_DOWNLOAD").sum() >= 4:
         alerts.append("Possible data exfiltration pattern detected (high downloads).")
     if -1 in anomalies:
@@ -267,8 +267,15 @@ if df is not None and not df.empty:
         c1, c2 = st.columns([2, 1])
         with c1:
             st.subheader("Activity over time")
-            activity = df.set_index("timestamp").resample("2S").size().reset_index()
+            df["timestamp"] = pd.to_datetime(df["timestamp"], errors="coerce")
+
+            df = df.dropna(subset=["timestamp"])  # remove invalid timestamps
+
+            df = df.sort_values("timestamp")
+
+            activity = df.set_index("timestamp").resample("2s").size().reset_index()
             activity.columns = ["time", "count"]
+
             st.line_chart(activity.set_index("time"))
         with c2:
             st.subheader("Action breakdown")
@@ -289,7 +296,7 @@ if df is not None and not df.empty:
     # -------------------------------
     # THREAT INTEL TAB (FAKE GEO)
     # -------------------------------
-    with tab_intel:
+    with tab_intelligence:
         st.subheader("IP geo view (demo)")
         st.caption("Locations are deterministically generated for visualization only.")
 
