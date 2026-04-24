@@ -1,4 +1,4 @@
-# 🔐 ThreatWatch AI  
+# ThreatWatch 
 ### AI-Assisted SOC Log Anomaly Detection & Threat Intelligence Dashboard  
 
 🚀 Live Demo: https://rogkb32rhi5lto8qcu2x4f.streamlit.app
@@ -7,7 +7,7 @@
 
 ## 📌 Overview  
 
-ThreatWatch AI is a Security Operations Center (SOC)-inspired dashboard that monitors system logs, detects suspicious behavior, and visualizes cyber threats in real time.
+ThreatWatch is a Security Operations Center (SOC)-inspired dashboard that monitors system logs, detects suspicious behavior, and visualizes cyber threats in real time.
 
 It combines rule-based detection with machine learning (Isolation Forest) to identify anomalies such as brute-force attacks and data exfiltration.
 
@@ -44,8 +44,8 @@ It combines rule-based detection with machine learning (Isolation Forest) to ide
 
 1. Clone the repository  
 
-git clone https://github.com/your-username/ThreatWatch-AI.git  
-cd ThreatWatch-AI  
+git clone https://github.com/ananya05verma/ThreatWatch.git  
+cd ThreatWatch
 
 2. Install dependencies  
 
